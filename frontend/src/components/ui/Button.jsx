@@ -10,7 +10,7 @@ export default function Button({
 }) {
   const variants = {
     primary:
-      "bg-gradient-to-r from-rose-500 via-indigo-500 to-emerald-400 text-white shadow-lg shadow-indigo-500/20 hover:brightness-110 focus-visible:outline-indigo-500",
+      "brand-gradient text-white shadow-lg shadow-purple-500/20 hover:brightness-110 focus-visible:outline-purple-400",
     secondary:
       "bg-white/10 text-white ring-1 ring-white/10 hover:bg-white/15 focus-visible:outline-slate-300",
     ghost:

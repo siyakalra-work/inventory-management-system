@@ -25,7 +25,7 @@ export default function Login() {
           <div className="hidden md:block">
             <div className="glass rounded-3xl p-8 shadow-[0_20px_80px_rgba(0,0,0,0.35)]">
               <div className="inline-flex items-center gap-3">
-                <div className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-rose-500 via-indigo-500 to-emerald-400 text-white">
+                <div className="brand-gradient grid h-11 w-11 place-items-center rounded-2xl text-white">
                   IO
                 </div>
                 <div>

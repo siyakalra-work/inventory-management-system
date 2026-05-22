@@ -20,7 +20,7 @@ export default function Layout() {
           <div className="sticky top-6 space-y-4">
             <div className="glass rounded-3xl px-4 py-4 shadow-[0_20px_80px_rgba(0,0,0,0.35)]">
               <Link to="/" className="flex items-center gap-3">
-                <div className="grid h-10 w-10 place-items-center rounded-2xl bg-gradient-to-br from-rose-500 via-indigo-500 to-emerald-400 text-white shadow-lg shadow-indigo-500/20">
+                <div className="brand-gradient grid h-10 w-10 place-items-center rounded-2xl text-white shadow-lg shadow-purple-500/20">
                   IO
                 </div>
                 <div>
