@@ -8,7 +8,8 @@ class RegisterRequest(BaseModel):
     tenant_slug: str = Field(min_length=2, max_length=100, pattern=r"^[a-z0-9-]+$")
     email: EmailStr
     full_name: str | None = Field(default=None, max_length=255)
-    password: str = Field(min_length=8, max_length=128)
+    # bcrypt only processes the first 72 bytes of a password
+    password: str = Field(min_length=8, max_length=72)
 
 
 class LoginRequest(BaseModel):
@@ -24,4 +25,3 @@ class TokenPair(BaseModel):
 
 class RefreshRequest(BaseModel):
     refresh_token: str
-
