@@ -21,21 +21,21 @@ export default function ToastHost() {
         <div
           key={t.id}
           className={cn(
-            "glass-2 rounded-2xl px-4 py-3 text-sm shadow-[0_20px_80px_rgba(0,0,0,0.35)]",
-            t.tone === "success" && "ring-1 ring-emerald-300/20",
-            t.tone === "error" && "ring-1 ring-rose-300/20",
-            t.tone === "info" && "ring-1 ring-indigo-300/20",
+            "surface soft-shadow rounded-2xl px-4 py-3 text-sm",
+            t.tone === "success" && "border-emerald-200",
+            t.tone === "error" && "border-rose-200",
+            t.tone === "info" && "border-indigo-200",
           )}
         >
           <div className="flex items-start justify-between gap-3">
             <div>
-              <div className="font-semibold text-white">{t.title}</div>
+              <div className="font-semibold text-slate-900">{t.title}</div>
               {t.message ? (
-                <div className="mt-0.5 text-slate-300">{t.message}</div>
+                <div className="mt-0.5 text-slate-600">{t.message}</div>
               ) : null}
             </div>
             <button
-              className="rounded-xl px-2 py-1 text-slate-300 hover:bg-white/5 hover:text-white"
+              className="rounded-xl px-2 py-1 text-slate-500 hover:bg-slate-50 hover:text-slate-700"
               onClick={() => remove(t.id)}
             >
               ✕

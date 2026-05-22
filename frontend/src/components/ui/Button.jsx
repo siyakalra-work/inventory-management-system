@@ -10,11 +10,11 @@ export default function Button({
 }) {
   const variants = {
     primary:
-      "brand-gradient text-white shadow-lg shadow-purple-500/20 hover:brightness-110 focus-visible:outline-purple-400",
+      "brand-gradient text-white shadow-sm hover:brightness-105 focus-visible:outline-rose-500",
     secondary:
-      "bg-white/10 text-white ring-1 ring-white/10 hover:bg-white/15 focus-visible:outline-slate-300",
+      "bg-white text-slate-900 ring-1 ring-slate-200 hover:bg-slate-50 focus-visible:outline-slate-300",
     ghost:
-      "bg-transparent text-slate-200 hover:bg-white/5 focus-visible:outline-slate-300",
+      "bg-transparent text-slate-700 hover:bg-slate-100 focus-visible:outline-slate-300",
     danger:
       "bg-rose-600 text-white hover:bg-rose-700 focus-visible:outline-rose-500",
   };

@@ -19,39 +19,39 @@ export default function Login() {
   const [busy, setBusy] = useState(false);
 
   return (
-    <div className="min-h-screen district-bg text-slate-100">
+    <div className="min-h-screen district-bg text-slate-900">
       <div className="mx-auto flex min-h-screen max-w-6xl items-center justify-center px-4 py-10">
         <div className="grid w-full max-w-4xl grid-cols-1 gap-8 md:grid-cols-2">
           <div className="hidden md:block">
-            <div className="glass rounded-3xl p-8 shadow-[0_20px_80px_rgba(0,0,0,0.35)]">
+            <div className="surface soft-shadow rounded-3xl p-8">
               <div className="inline-flex items-center gap-3">
                 <div className="brand-gradient grid h-11 w-11 place-items-center rounded-2xl text-white">
                   IO
                 </div>
                 <div>
-                  <div className="text-sm font-semibold text-white">
+                  <div className="text-sm font-semibold text-slate-900">
                     InventoryOS
                   </div>
-                  <div className="text-xs text-slate-300">
+                  <div className="text-xs text-slate-500">
                     Inventory, without the chaos
                   </div>
                 </div>
               </div>
-              <div className="mt-6 text-sm text-slate-200">
+              <div className="mt-6 text-sm text-slate-600">
                 Sign in to manage products, log stock movements, and keep
                 reorder points under control.
               </div>
-              <div className="mt-6 grid grid-cols-2 gap-3 text-xs text-slate-200">
-                <div className="rounded-2xl bg-white/5 p-4 ring-1 ring-white/10">
+              <div className="mt-6 grid grid-cols-2 gap-3 text-xs text-slate-600">
+                <div className="rounded-2xl bg-slate-50 p-4">
                   Fast search
                 </div>
-                <div className="rounded-2xl bg-white/5 p-4 ring-1 ring-white/10">
+                <div className="rounded-2xl bg-slate-50 p-4">
                   Clean tables
                 </div>
-                <div className="rounded-2xl bg-white/5 p-4 ring-1 ring-white/10">
+                <div className="rounded-2xl bg-slate-50 p-4">
                   Stock history
                 </div>
-                <div className="rounded-2xl bg-white/5 p-4 ring-1 ring-white/10">
+                <div className="rounded-2xl bg-slate-50 p-4">
                   Alerts ready
                 </div>
               </div>
@@ -61,13 +61,13 @@ export default function Login() {
           <Card className="shadow-lg">
             <CardHeader>
               <CardTitle>Welcome back</CardTitle>
-              <div className="mt-1 text-sm text-slate-300">
+              <div className="mt-1 text-sm text-slate-600">
                 Sign in to your tenant.
               </div>
             </CardHeader>
             <CardContent>
               {error ? (
-                <div className="mb-4 rounded-2xl border border-rose-300/20 bg-rose-500/10 px-4 py-3 text-sm text-rose-100">
+                <div className="mb-4 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">
                   {error}
                 </div>
               ) : null}
@@ -106,7 +106,7 @@ export default function Login() {
                 }}
               >
                 <div>
-                  <div className="mb-1 text-xs font-semibold text-slate-300">
+                  <div className="mb-1 text-xs font-semibold text-slate-600">
                     Email
                   </div>
                   <Input
@@ -117,7 +117,7 @@ export default function Login() {
                   />
                 </div>
                 <div>
-                  <div className="mb-1 text-xs font-semibold text-slate-300">
+                  <div className="mb-1 text-xs font-semibold text-slate-600">
                     Password
                   </div>
                   <Input
@@ -139,9 +139,9 @@ export default function Login() {
                 </Button>
               </form>
 
-              <div className="mt-5 text-sm text-slate-300">
+              <div className="mt-5 text-sm text-slate-600">
                 No account?{" "}
-                <Link className="font-semibold text-white" to="/register">
+                <Link className="font-semibold text-slate-900" to="/register">
                   Create a tenant
                 </Link>
               </div>

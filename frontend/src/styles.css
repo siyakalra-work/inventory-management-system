@@ -15,12 +15,12 @@
 @layer utilities {
   /* Brand tokens (adjust here to recolor the entire UI) */
   :root {
-    --brand-a: 255 45 85;   /* pink-red */
-    --brand-b: 168 85 247;  /* purple */
-    --brand-c: 34 211 238;  /* cyan */
-    --bg-0: 8 10 18;        /* deep */
-    --bg-1: 11 16 32;       /* surface */
-    --stroke: 148 163 184;  /* slate-400 */
+    --brand-a: 239 68 68;   /* red */
+    --brand-b: 245 158 11;  /* amber */
+    --brand-c: 236 72 153;  /* pink */
+    --bg-0: 248 250 252;    /* slate-50 */
+    --bg-1: 255 255 255;    /* white */
+    --stroke: 226 232 240;  /* slate-200 */
   }
 
   .brand-gradient {
@@ -34,27 +34,26 @@
 
   .district-bg {
     background:
-      radial-gradient(1100px 620px at 10% -10%, rgba(var(--brand-b), 0.44), transparent 60%),
-      radial-gradient(980px 560px at 92% 0%, rgba(var(--brand-a), 0.30), transparent 58%),
-      radial-gradient(980px 560px at 55% 115%, rgba(var(--brand-c), 0.22), transparent 58%),
-      linear-gradient(180deg, rgb(var(--bg-1)) 0%, rgb(var(--bg-1)) 45%, rgb(var(--bg-0)) 100%);
-  }
-
-  .glass {
-    background: rgba(255, 255, 255, 0.07);
-    border: 1px solid rgba(var(--stroke), 0.22);
-    backdrop-filter: blur(14px);
-  }
-
-  .glass-2 {
-    background: rgba(15, 23, 42, 0.52);
-    border: 1px solid rgba(var(--stroke), 0.24);
-    backdrop-filter: blur(12px);
+      radial-gradient(900px 360px at 20% -10%, rgba(var(--brand-a), 0.18), transparent 60%),
+      radial-gradient(900px 360px at 85% 0%, rgba(var(--brand-c), 0.14), transparent 58%),
+      linear-gradient(180deg, rgb(var(--bg-0)) 0%, rgb(var(--bg-0)) 100%);
   }
 
   .surface {
+    background: rgb(var(--bg-1));
+    border: 1px solid rgb(var(--stroke));
+  }
+
+  .soft-shadow {
+    box-shadow:
+      0 1px 0 rgba(15, 23, 42, 0.02),
+      0 12px 30px rgba(15, 23, 42, 0.08);
+  }
+
+  .poster {
     background:
-      linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-    border: 1px solid rgba(var(--stroke), 0.20);
+      radial-gradient(1200px 400px at 10% 0%, rgba(var(--brand-a), 0.20), transparent 60%),
+      radial-gradient(1200px 400px at 90% 20%, rgba(var(--brand-c), 0.16), transparent 55%),
+      linear-gradient(135deg, rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.78));
   }
 }

@@ -22,19 +22,19 @@ export default function Register() {
   const [busy, setBusy] = useState(false);
 
   return (
-    <div className="min-h-screen district-bg text-slate-100">
+    <div className="min-h-screen district-bg text-slate-900">
       <div className="mx-auto flex min-h-screen max-w-6xl items-center justify-center px-4 py-10">
         <div className="w-full max-w-xl">
           <Card className="shadow-lg">
             <CardHeader>
               <CardTitle>Create your tenant</CardTitle>
-              <div className="mt-1 text-sm text-slate-300">
+              <div className="mt-1 text-sm text-slate-600">
                 You’ll get a retailer admin account for this tenant.
               </div>
             </CardHeader>
             <CardContent>
               {error ? (
-                <div className="mb-4 rounded-2xl border border-rose-300/20 bg-rose-500/10 px-4 py-3 text-sm text-rose-100">
+                <div className="mb-4 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">
                   {error}
                 </div>
               ) : null}
@@ -81,7 +81,7 @@ export default function Register() {
               >
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                   <div>
-                    <div className="mb-1 text-xs font-semibold text-slate-300">
+                    <div className="mb-1 text-xs font-semibold text-slate-600">
                       Tenant name
                     </div>
                     <Input
@@ -91,7 +91,7 @@ export default function Register() {
                     />
                   </div>
                   <div>
-                    <div className="mb-1 text-xs font-semibold text-slate-300">
+                    <div className="mb-1 text-xs font-semibold text-slate-600">
                       Tenant slug
                     </div>
                     <Input
@@ -103,7 +103,7 @@ export default function Register() {
                         )
                       }
                     />
-                    <div className="mt-1 text-xs text-slate-400">
+                    <div className="mt-1 text-xs text-slate-500">
                       Lowercase letters, numbers, hyphens.
                     </div>
                   </div>
@@ -111,7 +111,7 @@ export default function Register() {
 
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                   <div>
-                    <div className="mb-1 text-xs font-semibold text-slate-300">
+                    <div className="mb-1 text-xs font-semibold text-slate-600">
                       Admin email
                     </div>
                     <Input
@@ -122,7 +122,7 @@ export default function Register() {
                     />
                   </div>
                   <div>
-                    <div className="mb-1 text-xs font-semibold text-slate-300">
+                    <div className="mb-1 text-xs font-semibold text-slate-600">
                       Full name (optional)
                     </div>
                     <Input
@@ -134,7 +134,7 @@ export default function Register() {
                 </div>
 
                 <div>
-                  <div className="mb-1 text-xs font-semibold text-slate-300">
+                  <div className="mb-1 text-xs font-semibold text-slate-600">
                     Password
                   </div>
                   <Input
@@ -152,9 +152,9 @@ export default function Register() {
                 </Button>
               </form>
 
-              <div className="mt-5 text-sm text-slate-300">
+              <div className="mt-5 text-sm text-slate-600">
                 Already have an account?{" "}
-                <Link className="font-semibold text-white" to="/login">
+                <Link className="font-semibold text-slate-900" to="/login">
                   Sign in
                 </Link>
               </div>

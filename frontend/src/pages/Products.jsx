@@ -6,7 +6,6 @@ import Button from "../components/ui/Button";
 import Input from "../components/ui/Input";
 import Badge from "../components/ui/Badge";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/Card";
-import { Table, TD, TH, THead } from "../components/ui/Table";
 import { useToastStore } from "../store/toastStore";
 import { IconSparkles } from "../components/ui/Icons";
 
@@ -82,9 +81,9 @@ export default function Products() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-xl font-semibold text-white">Products</h1>
-          <div className="mt-1 text-sm text-slate-300">
-            Search, add, and monitor reorder points.
+          <h1 className="text-xl font-semibold text-slate-900">Products</h1>
+          <div className="mt-1 text-sm text-slate-600">
+            Add products and keep an eye on reorder points.
           </div>
         </div>
         <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
@@ -100,7 +99,7 @@ export default function Products() {
       <Card>
         <CardHeader>
           <CardTitle>Add product</CardTitle>
-          <div className="mt-1 text-sm text-slate-300">
+          <div className="mt-1 text-sm text-slate-600">
             Keep SKUs unique per tenant.
           </div>
         </CardHeader>
@@ -116,7 +115,7 @@ export default function Products() {
             }}
           >
             <div className="md:col-span-3">
-              <div className="mb-1 text-xs font-semibold text-slate-300">
+              <div className="mb-1 text-xs font-semibold text-slate-600">
                 SKU
               </div>
               <Input
@@ -127,7 +126,7 @@ export default function Products() {
               />
             </div>
             <div className="md:col-span-4">
-              <div className="mb-1 text-xs font-semibold text-slate-300">
+              <div className="mb-1 text-xs font-semibold text-slate-600">
                 Name
               </div>
               <Input
@@ -140,7 +139,7 @@ export default function Products() {
               />
             </div>
             <div className="md:col-span-3">
-              <div className="mb-1 text-xs font-semibold text-slate-300">
+              <div className="mb-1 text-xs font-semibold text-slate-600">
                 Category
               </div>
               <Input
@@ -152,7 +151,7 @@ export default function Products() {
               />
             </div>
             <div className="md:col-span-2">
-              <div className="mb-1 text-xs font-semibold text-slate-300">
+              <div className="mb-1 text-xs font-semibold text-slate-600">
                 Reorder
               </div>
               <Input
@@ -178,80 +177,92 @@ export default function Products() {
         </CardContent>
       </Card>
 
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between">
-          <div>
-            <CardTitle>Catalog</CardTitle>
-            <div className="mt-1 text-sm text-slate-300">
-              {isLoading ? "Loading…" : `${rows.length} products`}
+      <div className="flex items-center justify-between">
+        <div className="text-sm font-semibold text-slate-900">
+          Catalog
+          <span className="ml-2 text-sm font-normal text-slate-600">
+            {isLoading ? "Loading…" : `${rows.length} products`}
+          </span>
+        </div>
+        <div className="flex items-center gap-2">
+          <Badge tone="amber">{lowStockIds.size} low</Badge>
+          <Badge tone="slate">stocks best-effort</Badge>
+        </div>
+      </div>
+
+      {error ? (
+        <div className="surface soft-shadow rounded-3xl p-4 text-sm text-rose-700">
+          {error?.response?.data?.detail || "Failed to load products"}
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          {isLoading ? (
+            <div className="surface soft-shadow rounded-3xl p-6 text-sm text-slate-600">
+              Loading…
             </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <Badge tone="amber">{lowStockIds.size} low</Badge>
-            <Badge tone="slate">stocks shown (best-effort)</Badge>
-          </div>
-        </CardHeader>
-        <CardContent className="p-0">
-          {error ? (
-            <div className="px-5 py-4 text-sm text-rose-200">
-              {error?.response?.data?.detail || "Failed to load products"}
-            </div>
-          ) : (
-            <Table>
-              <THead>
-                <tr>
-                  <TH>SKU</TH>
-                  <TH>Name</TH>
-                  <TH>Category</TH>
-                  <TH>Stock</TH>
-                  <TH>Reorder</TH>
-                  <TH>Status</TH>
-                </tr>
-              </THead>
-              <tbody>
-                {isLoading ? (
-                  <tr>
-                    <TD colSpan={6} className="text-slate-300">
-                      Loading…
-                    </TD>
-                  </tr>
-                ) : rows.length ? (
-                  rows.map((p) => {
-                    const stock = stocks[p.id];
-                    const low = lowStockIds.has(p.id);
-                    return (
-                      <tr key={p.id} className="border-t border-white/10">
-                        <TD className="font-medium text-white">{p.sku}</TD>
-                        <TD className="text-slate-100">{p.name}</TD>
-                        <TD className="text-slate-300">{p.category || "—"}</TD>
-                        <TD className="tabular-nums text-white">
+          ) : rows.length ? (
+            rows.map((p) => {
+              const stock = stocks[p.id];
+              const low = lowStockIds.has(p.id);
+              return (
+                <div
+                  key={p.id}
+                  className="surface soft-shadow overflow-hidden rounded-3xl"
+                >
+                  <div className="poster p-5 text-white">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <div className="text-xs font-semibold text-white/70">
+                          {p.category || "Uncategorized"}
+                        </div>
+                        <div className="mt-1 truncate text-lg font-semibold">
+                          {p.name}
+                        </div>
+                        <div className="mt-1 text-xs text-white/80">
+                          SKU: {p.sku}
+                        </div>
+                      </div>
+                      {low ? <Badge tone="rose">Low</Badge> : <Badge tone="emerald">OK</Badge>}
+                    </div>
+                  </div>
+                  <div className="p-5">
+                    <div className="grid grid-cols-3 gap-3">
+                      <div className="rounded-2xl bg-slate-50 p-3">
+                        <div className="text-xs font-semibold text-slate-600">
+                          Stock
+                        </div>
+                        <div className="mt-1 text-lg font-semibold tabular-nums text-slate-900">
                           {stock == null ? "—" : stock}
-                        </TD>
-                        <TD className="tabular-nums text-slate-200">
+                        </div>
+                      </div>
+                      <div className="rounded-2xl bg-slate-50 p-3">
+                        <div className="text-xs font-semibold text-slate-600">
+                          Reorder
+                        </div>
+                        <div className="mt-1 text-lg font-semibold tabular-nums text-slate-900">
                           {p.reorder_point}
-                        </TD>
-                        <TD>
-                          {low ? (
-                            <Badge tone="rose">Low</Badge>
-                          ) : (
-                            <Badge tone="emerald">OK</Badge>
-                          )}
-                        </TD>
-                      </tr>
-                    );
-                  })
-                ) : (
-                  <tr>
-                    <TD colSpan={6} className="text-slate-300">
-                      No products yet.
-                    </TD>
-                  </tr>
-                )}
-              </tbody>
-            </Table>
+                        </div>
+                      </div>
+                      <div className="rounded-2xl bg-slate-50 p-3">
+                        <div className="text-xs font-semibold text-slate-600">
+                          Status
+                        </div>
+                        <div className="mt-1 text-sm font-semibold text-slate-900">
+                          {low ? "Needs restock" : "Healthy"}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })
+          ) : (
+            <div className="surface soft-shadow rounded-3xl p-6 text-sm text-slate-600">
+              No products yet.
+            </div>
           )}
-        </CardContent>
-      </Card>
+        </div>
+      )}
     </div>
   );
 }

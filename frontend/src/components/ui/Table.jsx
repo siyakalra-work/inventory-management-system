@@ -12,7 +12,7 @@ export function THead({ className, ...props }) {
   return (
     <thead
       className={cn(
-        "bg-white/5 text-xs font-semibold text-slate-200",
+        "bg-slate-50 text-xs font-semibold text-slate-600",
         className,
       )}
       {...props}
@@ -23,7 +23,7 @@ export function THead({ className, ...props }) {
 export function TH({ className, ...props }) {
   return (
     <th
-      className={cn("px-5 py-3 tracking-wide text-slate-200", className)}
+      className={cn("px-5 py-3 tracking-wide", className)}
       {...props}
     />
   );
@@ -32,7 +32,7 @@ export function TH({ className, ...props }) {
 export function TD({ className, ...props }) {
   return (
     <td
-      className={cn("px-5 py-3 text-slate-200", className)}
+      className={cn("px-5 py-3 text-slate-800", className)}
       {...props}
     />
   );
