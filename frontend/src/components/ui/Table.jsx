@@ -21,7 +21,12 @@ export function THead({ className, ...props }) {
 }
 
 export function TH({ className, ...props }) {
-  return <th className={cn("px-5 py-3", className)} {...props} />;
+  return (
+    <th
+      className={cn("px-5 py-3 tracking-wide text-slate-200", className)}
+      {...props}
+    />
+  );
 }
 
 export function TD({ className, ...props }) {

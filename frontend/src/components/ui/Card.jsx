@@ -4,7 +4,7 @@ export function Card({ className, ...props }) {
   return (
     <div
       className={cn(
-        "glass-2 rounded-3xl shadow-[0_20px_80px_rgba(0,0,0,0.35)]",
+        "glass-2 surface rounded-3xl shadow-[0_18px_70px_rgba(0,0,0,0.35)] transition will-change-transform hover:-translate-y-0.5 hover:shadow-[0_22px_90px_rgba(0,0,0,0.45)]",
         className,
       )}
       {...props}

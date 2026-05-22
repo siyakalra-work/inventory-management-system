@@ -51,7 +51,7 @@ export default function Dashboard() {
         <div>
           <h1 className="text-xl font-semibold text-white">Dashboard</h1>
           <div className="mt-1 text-sm text-slate-300">
-            Quick overview — District-style, inventory-focused.
+            Your inventory home — quick stats, tasks, and activity.
           </div>
         </div>
         <div className="flex items-center gap-2 rounded-2xl bg-white/5 px-3 py-2 text-xs text-slate-200 ring-1 ring-white/10">

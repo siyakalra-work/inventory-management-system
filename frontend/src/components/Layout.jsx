@@ -15,7 +15,7 @@ export default function Layout() {
   const role = useAuthStore((s) => s.role);
   return (
     <div className="min-h-screen district-bg text-slate-100">
-      <div className="mx-auto flex max-w-6xl gap-6 px-4 py-6">
+      <div className="mx-auto flex max-w-7xl gap-7 px-4 py-7">
         <aside className="hidden w-64 shrink-0 md:block">
           <div className="sticky top-6 space-y-4">
             <div className="glass rounded-3xl px-4 py-4 shadow-[0_20px_80px_rgba(0,0,0,0.35)]">
@@ -27,7 +27,9 @@ export default function Layout() {
                   <div className="text-sm font-semibold text-white">
                     InventoryOS
                   </div>
-                  <div className="text-xs text-slate-300">{role || "signed in"}</div>
+                  <div className="text-xs text-slate-300">
+                    {role || "signed in"}
+                  </div>
                 </div>
               </Link>
             </div>
@@ -67,6 +69,11 @@ export default function Layout() {
                 Logout
               </button>
             </nav>
+
+            <div className="glass rounded-3xl px-4 py-4 text-xs text-slate-300">
+              Tip: Set reorder points on products, then use Inventory to keep
+              stock healthy.
+            </div>
           </div>
         </aside>
 
@@ -74,7 +81,7 @@ export default function Layout() {
           <header className="mb-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <div>
               <div className="text-xs font-medium text-slate-300">InventoryOS</div>
-              <div className="text-lg font-semibold text-white">
+              <div className="text-[22px] font-semibold leading-tight text-white">
                 Manage products and stock
               </div>
             </div>
@@ -82,7 +89,7 @@ export default function Layout() {
               <div className="relative w-full md:w-80">
                 <IconSearch className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-300" />
                 <Input
-                  className="h-10 w-full rounded-2xl border-white/10 bg-white/5 pl-9 text-slate-100 placeholder:text-slate-400 shadow-none focus:border-white/15 focus:ring-white/10"
+                  className="h-10 w-full rounded-2xl border-white/10 bg-white/6 pl-9 text-slate-100 placeholder:text-slate-400 shadow-none focus:border-white/15 focus:ring-white/10"
                   placeholder="Search (coming soon)…"
                 />
               </div>
