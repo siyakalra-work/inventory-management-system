@@ -9,6 +9,11 @@ import Badge from "../components/ui/Badge";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/Card";
 import { Table, TD, TH, THead } from "../components/ui/Table";
 import { useToastStore } from "../store/toastStore";
+import {
+  IconArrowDownLeft,
+  IconArrowUpRight,
+  IconSliders,
+} from "../components/ui/Icons";
 
 function typeTone(type) {
   if (type === "stock_in") return "emerald";
@@ -68,13 +73,14 @@ export default function Inventory() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-xl font-semibold text-slate-900">Inventory</h1>
-          <div className="mt-1 text-sm text-slate-600">
+          <h1 className="text-xl font-semibold text-white">Inventory</h1>
+          <div className="mt-1 text-sm text-slate-300">
             Record stock movements and review history.
           </div>
         </div>
         <div className="flex items-center gap-2">
           <Badge tone="slate">tenant-scoped</Badge>
+          <Badge tone="indigo">District theme</Badge>
         </div>
       </div>
 
@@ -82,7 +88,7 @@ export default function Inventory() {
         <Card className="lg:col-span-2">
           <CardHeader>
             <CardTitle>New transaction</CardTitle>
-            <div className="mt-1 text-sm text-slate-600">
+            <div className="mt-1 text-sm text-slate-300">
               Choose a product, then stock in/out/adjust.
             </div>
           </CardHeader>
@@ -100,7 +106,7 @@ export default function Inventory() {
               }}
             >
               <div className="md:col-span-5">
-                <div className="mb-1 text-xs font-semibold text-slate-600">
+                <div className="mb-1 text-xs font-semibold text-slate-300">
                   Product
                 </div>
                 <Select
@@ -117,7 +123,7 @@ export default function Inventory() {
                 </Select>
               </div>
               <div className="md:col-span-3">
-                <div className="mb-1 text-xs font-semibold text-slate-600">
+                <div className="mb-1 text-xs font-semibold text-slate-300">
                   Type
                 </div>
                 <Select value={type} onChange={(e) => setType(e.target.value)}>
@@ -127,7 +133,7 @@ export default function Inventory() {
                 </Select>
               </div>
               <div className="md:col-span-2">
-                <div className="mb-1 text-xs font-semibold text-slate-600">
+                <div className="mb-1 text-xs font-semibold text-slate-300">
                   Quantity
                 </div>
                 <Input
@@ -138,7 +144,7 @@ export default function Inventory() {
                 />
               </div>
               <div className="md:col-span-12">
-                <div className="mb-1 text-xs font-semibold text-slate-600">
+                <div className="mb-1 text-xs font-semibold text-slate-300">
                   Note (optional)
                 </div>
                 <Input
@@ -153,6 +159,11 @@ export default function Inventory() {
                   className="w-full"
                   disabled={create.isPending}
                 >
+                  {type === "stock_out" ? (
+                    <IconArrowUpRight className="h-4 w-4" />
+                  ) : (
+                    <IconArrowDownLeft className="h-4 w-4" />
+                  )}
                   {create.isPending ? "Saving…" : "Record transaction"}
                 </Button>
               </div>
@@ -163,7 +174,7 @@ export default function Inventory() {
         <Card>
           <CardHeader>
             <CardTitle>Stock snapshot</CardTitle>
-            <div className="mt-1 text-sm text-slate-600">
+            <div className="mt-1 text-sm text-slate-300">
               {selectedProduct
                 ? `${selectedProduct.sku} — ${selectedProduct.name}`
                 : "Select a product"}
@@ -172,39 +183,39 @@ export default function Inventory() {
           <CardContent>
             {productId ? (
               stockQuery.isLoading ? (
-                <div className="text-sm text-slate-600">Loading…</div>
+                <div className="text-sm text-slate-300">Loading…</div>
               ) : stockQuery.error ? (
-                <div className="text-sm text-rose-700">Failed to load stock</div>
+                <div className="text-sm text-rose-200">Failed to load stock</div>
               ) : (
                 <div className="space-y-3">
-                  <div className="rounded-2xl border border-slate-200/70 bg-slate-50 px-4 py-4">
-                    <div className="text-xs font-semibold text-slate-600">
+                  <div className="rounded-3xl bg-white/5 px-4 py-4 ring-1 ring-white/10">
+                    <div className="text-xs font-semibold text-slate-300">
                       Current stock
                     </div>
-                    <div className="mt-1 text-2xl font-semibold text-slate-900 tabular-nums">
+                    <div className="mt-1 text-2xl font-semibold text-white tabular-nums">
                       {stockQuery.data.stock}
                     </div>
                   </div>
-                  <div className="flex items-center justify-between rounded-2xl border border-slate-200/70 bg-white px-4 py-3">
-                    <div className="text-sm text-slate-700">Reorder point</div>
-                    <div className="text-sm font-semibold tabular-nums text-slate-900">
+                  <div className="flex items-center justify-between rounded-3xl bg-white/5 px-4 py-3 ring-1 ring-white/10">
+                    <div className="text-sm text-slate-200">Reorder point</div>
+                    <div className="text-sm font-semibold tabular-nums text-white">
                       {stockQuery.data.reorder_point}
                     </div>
                   </div>
                   {(stockQuery.data.reorder_point ?? 0) > 0 &&
                   stockQuery.data.stock <= stockQuery.data.reorder_point ? (
-                    <div className="rounded-2xl border border-rose-100 bg-rose-50 px-4 py-3 text-sm text-rose-700">
+                    <div className="rounded-3xl border border-rose-300/20 bg-rose-500/10 px-4 py-3 text-sm text-rose-100">
                       Low stock. Consider stocking in soon.
                     </div>
                   ) : (
-                    <div className="rounded-2xl border border-emerald-100 bg-emerald-50 px-4 py-3 text-sm text-emerald-700">
+                    <div className="rounded-3xl border border-emerald-300/20 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-100">
                       Stock level looks healthy.
                     </div>
                   )}
                 </div>
               )
             ) : (
-              <div className="text-sm text-slate-600">
+              <div className="text-sm text-slate-300">
                 Select a product to see stock and reorder status.
               </div>
             )}
@@ -216,7 +227,7 @@ export default function Inventory() {
         <CardHeader className="flex flex-row items-center justify-between">
           <div>
             <CardTitle>Recent transactions</CardTitle>
-            <div className="mt-1 text-sm text-slate-600">
+            <div className="mt-1 text-sm text-slate-300">
               {txns.isLoading ? "Loading…" : `${(txns.data || []).length} shown`}
             </div>
           </div>
@@ -226,6 +237,10 @@ export default function Inventory() {
             ) : (
               <Badge tone="slate">all products</Badge>
             )}
+            <Badge tone="slate" className="hidden sm:inline-flex">
+              <IconSliders className="mr-1 h-3.5 w-3.5" />
+              filters soon
+            </Badge>
           </div>
         </CardHeader>
         <CardContent className="p-0">
@@ -242,27 +257,27 @@ export default function Inventory() {
             <tbody>
               {txns.isLoading ? (
                 <tr>
-                  <TD colSpan={5} className="text-slate-600">
+                  <TD colSpan={5} className="text-slate-300">
                     Loading…
                   </TD>
                 </tr>
               ) : (txns.data || []).length ? (
                 txns.data.map((t) => (
-                  <tr key={t.id} className="border-t border-slate-200/70">
-                    <TD className="tabular-nums text-slate-700">{t.id}</TD>
-                    <TD className="text-slate-900">#{t.product_id}</TD>
+                  <tr key={t.id} className="border-t border-white/10">
+                    <TD className="tabular-nums text-slate-200">{t.id}</TD>
+                    <TD className="text-white">#{t.product_id}</TD>
                     <TD>
                       <Badge tone={typeTone(t.type)}>{t.type}</Badge>
                     </TD>
-                    <TD className="tabular-nums font-medium text-slate-900">
+                    <TD className="tabular-nums font-medium text-white">
                       {t.quantity}
                     </TD>
-                    <TD className="text-slate-600">{t.note || "—"}</TD>
+                    <TD className="text-slate-300">{t.note || "—"}</TD>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <TD colSpan={5} className="text-slate-600">
+                  <TD colSpan={5} className="text-slate-300">
                     No transactions yet.
                   </TD>
                 </tr>
@@ -274,4 +289,3 @@ export default function Inventory() {
     </div>
   );
 }
-

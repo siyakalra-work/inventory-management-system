@@ -6,6 +6,7 @@ import { useToastStore } from "../store/toastStore";
 import Button from "../components/ui/Button";
 import Input from "../components/ui/Input";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/Card";
+import { IconTicket } from "../components/ui/Icons";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -18,39 +19,39 @@ export default function Login() {
   const [busy, setBusy] = useState(false);
 
   return (
-    <div className="min-h-screen bg-slate-50 app-gradient">
+    <div className="min-h-screen district-bg text-slate-100">
       <div className="mx-auto flex min-h-screen max-w-6xl items-center justify-center px-4 py-10">
         <div className="grid w-full max-w-4xl grid-cols-1 gap-8 md:grid-cols-2">
           <div className="hidden md:block">
-            <div className="rounded-3xl border border-slate-200/70 bg-white/70 p-8 shadow-sm backdrop-blur">
+            <div className="glass rounded-3xl p-8 shadow-[0_20px_80px_rgba(0,0,0,0.35)]">
               <div className="inline-flex items-center gap-3">
-                <div className="grid h-11 w-11 place-items-center rounded-2xl bg-indigo-600 text-white">
+                <div className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-rose-500 via-indigo-500 to-emerald-400 text-white">
                   IO
                 </div>
                 <div>
-                  <div className="text-sm font-semibold text-slate-900">
+                  <div className="text-sm font-semibold text-white">
                     InventoryOS
                   </div>
-                  <div className="text-xs text-slate-600">
+                  <div className="text-xs text-slate-300">
                     Inventory, without the chaos
                   </div>
                 </div>
               </div>
-              <div className="mt-6 text-sm text-slate-700">
+              <div className="mt-6 text-sm text-slate-200">
                 Sign in to manage products, log stock movements, and keep
                 reorder points under control.
               </div>
-              <div className="mt-6 grid grid-cols-2 gap-3 text-xs text-slate-600">
-                <div className="rounded-2xl border border-slate-200/70 bg-white p-4">
+              <div className="mt-6 grid grid-cols-2 gap-3 text-xs text-slate-200">
+                <div className="rounded-2xl bg-white/5 p-4 ring-1 ring-white/10">
                   Fast search
                 </div>
-                <div className="rounded-2xl border border-slate-200/70 bg-white p-4">
+                <div className="rounded-2xl bg-white/5 p-4 ring-1 ring-white/10">
                   Clean tables
                 </div>
-                <div className="rounded-2xl border border-slate-200/70 bg-white p-4">
+                <div className="rounded-2xl bg-white/5 p-4 ring-1 ring-white/10">
                   Stock history
                 </div>
-                <div className="rounded-2xl border border-slate-200/70 bg-white p-4">
+                <div className="rounded-2xl bg-white/5 p-4 ring-1 ring-white/10">
                   Alerts ready
                 </div>
               </div>
@@ -60,13 +61,13 @@ export default function Login() {
           <Card className="shadow-lg">
             <CardHeader>
               <CardTitle>Welcome back</CardTitle>
-              <div className="mt-1 text-sm text-slate-600">
+              <div className="mt-1 text-sm text-slate-300">
                 Sign in to your tenant.
               </div>
             </CardHeader>
             <CardContent>
               {error ? (
-                <div className="mb-4 rounded-xl border border-rose-100 bg-rose-50 px-4 py-3 text-sm text-rose-700">
+                <div className="mb-4 rounded-2xl border border-rose-300/20 bg-rose-500/10 px-4 py-3 text-sm text-rose-100">
                   {error}
                 </div>
               ) : null}
@@ -105,7 +106,7 @@ export default function Login() {
                 }}
               >
                 <div>
-                  <div className="mb-1 text-xs font-semibold text-slate-600">
+                  <div className="mb-1 text-xs font-semibold text-slate-300">
                     Email
                   </div>
                   <Input
@@ -116,7 +117,7 @@ export default function Login() {
                   />
                 </div>
                 <div>
-                  <div className="mb-1 text-xs font-semibold text-slate-600">
+                  <div className="mb-1 text-xs font-semibold text-slate-300">
                     Password
                   </div>
                   <Input
@@ -133,13 +134,14 @@ export default function Login() {
                   className="w-full"
                   disabled={busy}
                 >
+                  <IconTicket className="h-4 w-4" />
                   {busy ? "Signing in..." : "Sign in"}
                 </Button>
               </form>
 
-              <div className="mt-5 text-sm text-slate-600">
+              <div className="mt-5 text-sm text-slate-300">
                 No account?{" "}
-                <Link className="font-semibold text-indigo-700" to="/register">
+                <Link className="font-semibold text-white" to="/register">
                   Create a tenant
                 </Link>
               </div>
@@ -150,4 +152,3 @@ export default function Login() {
     </div>
   );
 }
-

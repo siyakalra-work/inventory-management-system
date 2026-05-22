@@ -11,7 +11,10 @@ export function Table({ className, ...props }) {
 export function THead({ className, ...props }) {
   return (
     <thead
-      className={cn("bg-slate-50 text-xs font-semibold text-slate-600", className)}
+      className={cn(
+        "bg-white/5 text-xs font-semibold text-slate-200",
+        className,
+      )}
       {...props}
     />
   );
@@ -22,6 +25,10 @@ export function TH({ className, ...props }) {
 }
 
 export function TD({ className, ...props }) {
-  return <td className={cn("px-5 py-3", className)} {...props} />;
+  return (
+    <td
+      className={cn("px-5 py-3 text-slate-200", className)}
+      {...props}
+    />
+  );
 }
-

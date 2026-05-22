@@ -6,6 +6,7 @@ import { useToastStore } from "../store/toastStore";
 import Button from "../components/ui/Button";
 import Input from "../components/ui/Input";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/Card";
+import { IconSparkles } from "../components/ui/Icons";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -21,19 +22,19 @@ export default function Register() {
   const [busy, setBusy] = useState(false);
 
   return (
-    <div className="min-h-screen bg-slate-50 app-gradient">
+    <div className="min-h-screen district-bg text-slate-100">
       <div className="mx-auto flex min-h-screen max-w-6xl items-center justify-center px-4 py-10">
         <div className="w-full max-w-xl">
           <Card className="shadow-lg">
             <CardHeader>
               <CardTitle>Create your tenant</CardTitle>
-              <div className="mt-1 text-sm text-slate-600">
+              <div className="mt-1 text-sm text-slate-300">
                 You’ll get a retailer admin account for this tenant.
               </div>
             </CardHeader>
             <CardContent>
               {error ? (
-                <div className="mb-4 rounded-xl border border-rose-100 bg-rose-50 px-4 py-3 text-sm text-rose-700">
+                <div className="mb-4 rounded-2xl border border-rose-300/20 bg-rose-500/10 px-4 py-3 text-sm text-rose-100">
                   {error}
                 </div>
               ) : null}
@@ -80,7 +81,7 @@ export default function Register() {
               >
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                   <div>
-                    <div className="mb-1 text-xs font-semibold text-slate-600">
+                    <div className="mb-1 text-xs font-semibold text-slate-300">
                       Tenant name
                     </div>
                     <Input
@@ -90,7 +91,7 @@ export default function Register() {
                     />
                   </div>
                   <div>
-                    <div className="mb-1 text-xs font-semibold text-slate-600">
+                    <div className="mb-1 text-xs font-semibold text-slate-300">
                       Tenant slug
                     </div>
                     <Input
@@ -102,7 +103,7 @@ export default function Register() {
                         )
                       }
                     />
-                    <div className="mt-1 text-xs text-slate-500">
+                    <div className="mt-1 text-xs text-slate-400">
                       Lowercase letters, numbers, hyphens.
                     </div>
                   </div>
@@ -110,7 +111,7 @@ export default function Register() {
 
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                   <div>
-                    <div className="mb-1 text-xs font-semibold text-slate-600">
+                    <div className="mb-1 text-xs font-semibold text-slate-300">
                       Admin email
                     </div>
                     <Input
@@ -121,7 +122,7 @@ export default function Register() {
                     />
                   </div>
                   <div>
-                    <div className="mb-1 text-xs font-semibold text-slate-600">
+                    <div className="mb-1 text-xs font-semibold text-slate-300">
                       Full name (optional)
                     </div>
                     <Input
@@ -133,7 +134,7 @@ export default function Register() {
                 </div>
 
                 <div>
-                  <div className="mb-1 text-xs font-semibold text-slate-600">
+                  <div className="mb-1 text-xs font-semibold text-slate-300">
                     Password
                   </div>
                   <Input
@@ -146,13 +147,14 @@ export default function Register() {
                 </div>
 
                 <Button type="submit" size="lg" className="w-full" disabled={busy}>
+                  <IconSparkles className="h-4 w-4" />
                   {busy ? "Creating..." : "Create tenant"}
                 </Button>
               </form>
 
-              <div className="mt-5 text-sm text-slate-600">
+              <div className="mt-5 text-sm text-slate-300">
                 Already have an account?{" "}
-                <Link className="font-semibold text-indigo-700" to="/login">
+                <Link className="font-semibold text-white" to="/login">
                   Sign in
                 </Link>
               </div>
@@ -163,4 +165,3 @@ export default function Register() {
     </div>
   );
 }
-

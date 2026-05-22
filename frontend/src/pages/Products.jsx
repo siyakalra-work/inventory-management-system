@@ -8,6 +8,7 @@ import Badge from "../components/ui/Badge";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/Card";
 import { Table, TD, TH, THead } from "../components/ui/Table";
 import { useToastStore } from "../store/toastStore";
+import { IconSparkles } from "../components/ui/Icons";
 
 function useProductStocks(products) {
   const ids = products.map((p) => p.id);
@@ -81,8 +82,8 @@ export default function Products() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-xl font-semibold text-slate-900">Products</h1>
-          <div className="mt-1 text-sm text-slate-600">
+          <h1 className="text-xl font-semibold text-white">Products</h1>
+          <div className="mt-1 text-sm text-slate-300">
             Search, add, and monitor reorder points.
           </div>
         </div>
@@ -99,7 +100,7 @@ export default function Products() {
       <Card>
         <CardHeader>
           <CardTitle>Add product</CardTitle>
-          <div className="mt-1 text-sm text-slate-600">
+          <div className="mt-1 text-sm text-slate-300">
             Keep SKUs unique per tenant.
           </div>
         </CardHeader>
@@ -115,7 +116,7 @@ export default function Products() {
             }}
           >
             <div className="md:col-span-3">
-              <div className="mb-1 text-xs font-semibold text-slate-600">
+              <div className="mb-1 text-xs font-semibold text-slate-300">
                 SKU
               </div>
               <Input
@@ -126,7 +127,7 @@ export default function Products() {
               />
             </div>
             <div className="md:col-span-4">
-              <div className="mb-1 text-xs font-semibold text-slate-600">
+              <div className="mb-1 text-xs font-semibold text-slate-300">
                 Name
               </div>
               <Input
@@ -139,7 +140,7 @@ export default function Products() {
               />
             </div>
             <div className="md:col-span-3">
-              <div className="mb-1 text-xs font-semibold text-slate-600">
+              <div className="mb-1 text-xs font-semibold text-slate-300">
                 Category
               </div>
               <Input
@@ -151,7 +152,7 @@ export default function Products() {
               />
             </div>
             <div className="md:col-span-2">
-              <div className="mb-1 text-xs font-semibold text-slate-600">
+              <div className="mb-1 text-xs font-semibold text-slate-300">
                 Reorder
               </div>
               <Input
@@ -169,6 +170,7 @@ export default function Products() {
                 size="lg"
                 disabled={create.isPending}
               >
+                <IconSparkles className="h-4 w-4" />
                 {create.isPending ? "Creating…" : "Create product"}
               </Button>
             </div>
@@ -180,7 +182,7 @@ export default function Products() {
         <CardHeader className="flex flex-row items-center justify-between">
           <div>
             <CardTitle>Catalog</CardTitle>
-            <div className="mt-1 text-sm text-slate-600">
+            <div className="mt-1 text-sm text-slate-300">
               {isLoading ? "Loading…" : `${rows.length} products`}
             </div>
           </div>
@@ -191,7 +193,7 @@ export default function Products() {
         </CardHeader>
         <CardContent className="p-0">
           {error ? (
-            <div className="px-5 py-4 text-sm text-rose-700">
+            <div className="px-5 py-4 text-sm text-rose-200">
               {error?.response?.data?.detail || "Failed to load products"}
             </div>
           ) : (
@@ -209,7 +211,7 @@ export default function Products() {
               <tbody>
                 {isLoading ? (
                   <tr>
-                    <TD colSpan={6} className="text-slate-600">
+                    <TD colSpan={6} className="text-slate-300">
                       Loading…
                     </TD>
                   </tr>
@@ -218,14 +220,14 @@ export default function Products() {
                     const stock = stocks[p.id];
                     const low = lowStockIds.has(p.id);
                     return (
-                      <tr key={p.id} className="border-t border-slate-200/70">
-                        <TD className="font-medium text-slate-900">{p.sku}</TD>
-                        <TD className="text-slate-700">{p.name}</TD>
-                        <TD className="text-slate-600">{p.category || "—"}</TD>
-                        <TD className="tabular-nums text-slate-900">
+                      <tr key={p.id} className="border-t border-white/10">
+                        <TD className="font-medium text-white">{p.sku}</TD>
+                        <TD className="text-slate-100">{p.name}</TD>
+                        <TD className="text-slate-300">{p.category || "—"}</TD>
+                        <TD className="tabular-nums text-white">
                           {stock == null ? "—" : stock}
                         </TD>
-                        <TD className="tabular-nums text-slate-700">
+                        <TD className="tabular-nums text-slate-200">
                           {p.reorder_point}
                         </TD>
                         <TD>
@@ -240,7 +242,7 @@ export default function Products() {
                   })
                 ) : (
                   <tr>
-                    <TD colSpan={6} className="text-slate-600">
+                    <TD colSpan={6} className="text-slate-300">
                       No products yet.
                     </TD>
                   </tr>
@@ -253,4 +255,3 @@ export default function Products() {
     </div>
   );
 }
-
