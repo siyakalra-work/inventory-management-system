@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from fastapi import APIRouter, Depends, HTTPException, Query, Response
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
 from app.api.deps import get_current_user, get_tenant_id
@@ -70,15 +70,15 @@ def update_product(
     return product
 
 
-@router.delete("/{product_id}", status_code=204, response_class=Response)
+@router.delete("/{product_id}")
 def delete_product(
     product_id: int,
     db: Session = Depends(get_db),
     tenant_id: int = Depends(get_tenant_id),
-) -> None:
+) -> dict:
     product = db.query(Product).filter(Product.tenant_id == tenant_id, Product.id == product_id).first()
     if not product:
         raise HTTPException(status_code=404, detail="Not found")
     db.delete(product)
     db.commit()
-    return Response(status_code=204)
+    return {"deleted": True}
