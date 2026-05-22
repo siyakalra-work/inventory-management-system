@@ -70,7 +70,7 @@ def update_product(
     return product
 
 
-@router.delete("/{product_id}", status_code=204)
+@router.delete("/{product_id}", status_code=204, response_class=Response)
 def delete_product(
     product_id: int,
     db: Session = Depends(get_db),
