@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import "./styles.css";
+import ToastHost from "./components/ui/ToastHost";
 
 const queryClient = new QueryClient();
 
@@ -12,8 +13,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <App />
+        <ToastHost />
       </BrowserRouter>
     </QueryClientProvider>
   </React.StrictMode>,
 );
-

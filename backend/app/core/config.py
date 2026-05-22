@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     secret_key: str
     access_token_expire_minutes: int = 30
     refresh_token_expire_days: int = 14
-    allowed_origins: str = "http://localhost:5173,http://localhost"
+    allowed_origins: str = "http://localhost:5173"
 
     @property
     def allowed_origins_list(self) -> list[str]:

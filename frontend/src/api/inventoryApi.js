@@ -12,3 +12,7 @@ export async function listTransactions(productId) {
   return data;
 }
 
+export async function getStock(productId) {
+  const { data } = await api.get(`/inventory/stock/${productId}`);
+  return data;
+}
