@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query, Response
 from sqlalchemy.orm import Session
 
 from app.api.deps import get_current_user, get_tenant_id
@@ -81,5 +81,4 @@ def delete_product(
         raise HTTPException(status_code=404, detail="Not found")
     db.delete(product)
     db.commit()
-    return None
-
+    return Response(status_code=204)
