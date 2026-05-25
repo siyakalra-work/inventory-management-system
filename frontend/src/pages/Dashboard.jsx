@@ -58,6 +58,11 @@ export default function Dashboard() {
               <Link to="/products">
                 <Button size="sm">Add products</Button>
               </Link>
+              <Link to="/alerts">
+                <Button size="sm" variant="secondary">
+                  View alerts
+                </Button>
+              </Link>
               <Link to="/inventory">
                 <Button size="sm" variant="secondary">
                   Record stock
@@ -91,6 +96,101 @@ export default function Dashboard() {
           hint="Products with reorder point set"
           tone="amber"
         />
+      </div>
+
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <Card>
+          <CardHeader>
+            <CardTitle>Quick actions</CardTitle>
+            <div className="mt-1 text-sm text-slate-600">
+              Common tasks to keep things moving.
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <Link
+                to="/products"
+                className="surface rounded-3xl p-4 transition hover:-translate-y-0.5 hover:shadow-sm"
+              >
+                <div className="text-sm font-semibold text-slate-900">
+                  Add products
+                </div>
+                <div className="mt-1 text-sm text-slate-600">
+                  Create SKUs and set reorder points.
+                </div>
+              </Link>
+              <Link
+                to="/inventory"
+                className="surface rounded-3xl p-4 transition hover:-translate-y-0.5 hover:shadow-sm"
+              >
+                <div className="text-sm font-semibold text-slate-900">
+                  Record stock
+                </div>
+                <div className="mt-1 text-sm text-slate-600">
+                  Stock in, out, and adjustments.
+                </div>
+              </Link>
+              <Link
+                to="/alerts"
+                className="surface rounded-3xl p-4 transition hover:-translate-y-0.5 hover:shadow-sm"
+              >
+                <div className="text-sm font-semibold text-slate-900">
+                  Check alerts
+                </div>
+                <div className="mt-1 text-sm text-slate-600">
+                  Low stock items to replenish.
+                </div>
+              </Link>
+              <div className="surface rounded-3xl p-4">
+                <div className="text-sm font-semibold text-slate-900">
+                  Coming soon
+                </div>
+                <div className="mt-1 text-sm text-slate-600">
+                  Reports, exports, and user invites.
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Recent products</CardTitle>
+            <div className="mt-1 text-sm text-slate-600">
+              Latest additions (up to 6).
+            </div>
+          </CardHeader>
+          <CardContent>
+            {productsQuery.isLoading ? (
+              <div className="text-sm text-slate-600">Loading…</div>
+            ) : products.length ? (
+              <div className="space-y-2">
+                {products.slice(0, 6).map((p) => (
+                  <div
+                    key={p.id}
+                    className="flex items-center justify-between rounded-2xl bg-slate-50 px-4 py-3"
+                  >
+                    <div className="min-w-0">
+                      <div className="truncate text-sm font-semibold text-slate-900">
+                        {p.name}
+                      </div>
+                      <div className="mt-0.5 text-xs text-slate-500">
+                        {p.sku} · {p.category || "Uncategorized"}
+                      </div>
+                    </div>
+                    <Badge tone={(p.reorder_point ?? 0) > 0 ? "amber" : "slate"}>
+                      RP {p.reorder_point}
+                    </Badge>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="text-sm text-slate-600">
+                No products yet. Add your first SKU.
+              </div>
+            )}
+          </CardContent>
+        </Card>
       </div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">

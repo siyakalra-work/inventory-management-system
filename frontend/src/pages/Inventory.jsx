@@ -29,6 +29,7 @@ export default function Inventory() {
   const [type, setType] = useState("stock_in");
   const [quantity, setQuantity] = useState(1);
   const [note, setNote] = useState("");
+  const [txnTypeFilter, setTxnTypeFilter] = useState("");
 
   const products = useQuery({
     queryKey: ["products"],
@@ -68,6 +69,12 @@ export default function Inventory() {
       });
     },
   });
+
+  const filteredTxns = useMemo(() => {
+    const all = txns.data || [];
+    if (!txnTypeFilter) return all;
+    return all.filter((t) => t.type === txnTypeFilter);
+  }, [txns.data, txnTypeFilter]);
 
   return (
     <div className="space-y-6">
@@ -227,7 +234,7 @@ export default function Inventory() {
           <div>
             <CardTitle>Recent transactions</CardTitle>
             <div className="mt-1 text-sm text-slate-600">
-              {txns.isLoading ? "Loading…" : `${(txns.data || []).length} shown`}
+              {txns.isLoading ? "Loading…" : `${filteredTxns.length} shown`}
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -236,10 +243,22 @@ export default function Inventory() {
             ) : (
               <Badge tone="slate">all products</Badge>
             )}
-            <Badge tone="slate" className="hidden sm:inline-flex">
-              <IconSliders className="mr-1 h-3.5 w-3.5" />
-              filters soon
-            </Badge>
+            <div className="hidden items-center gap-2 sm:flex">
+              <Badge tone="slate" className="inline-flex">
+                <IconSliders className="mr-1 h-3.5 w-3.5" />
+                Type
+              </Badge>
+              <Select
+                className="h-9 rounded-2xl"
+                value={txnTypeFilter}
+                onChange={(e) => setTxnTypeFilter(e.target.value)}
+              >
+                <option value="">All</option>
+                <option value="stock_in">stock_in</option>
+                <option value="stock_out">stock_out</option>
+                <option value="adjustment">adjustment</option>
+              </Select>
+            </div>
           </div>
         </CardHeader>
         <CardContent className="p-0">
@@ -260,8 +279,8 @@ export default function Inventory() {
                     Loading…
                   </TD>
                 </tr>
-              ) : (txns.data || []).length ? (
-                txns.data.map((t) => (
+              ) : filteredTxns.length ? (
+                filteredTxns.map((t) => (
                   <tr key={t.id} className="border-t border-slate-200">
                     <TD className="tabular-nums text-slate-700">{t.id}</TD>
                     <TD className="text-slate-900">#{t.product_id}</TD>
