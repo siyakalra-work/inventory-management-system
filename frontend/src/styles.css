@@ -15,10 +15,10 @@
 @layer utilities {
   /* Brand tokens (adjust here to recolor the entire UI) */
   :root {
-    --brand-a: 239 68 68;   /* red */
-    --brand-b: 245 158 11;  /* amber */
-    --brand-c: 236 72 153;  /* pink */
-    --bg-0: 248 250 252;    /* slate-50 */
+    --brand-a: 17 24 39;    /* slate-900 */
+    --brand-b: 0 0 0;       /* black */
+    --brand-c: 148 163 184; /* slate-400 */
+    --bg-0: 255 255 255;    /* white */
     --bg-1: 255 255 255;    /* white */
     --stroke: 226 232 240;  /* slate-200 */
   }
@@ -26,17 +26,17 @@
   .brand-gradient {
     background: linear-gradient(
       90deg,
-      rgb(var(--brand-a)) 0%,
-      rgb(var(--brand-b)) 45%,
-      rgb(var(--brand-c)) 100%
+      rgb(0 0 0) 0%,
+      rgb(17 24 39) 55%,
+      rgb(148 163 184) 100%
     );
   }
 
   .district-bg {
     background:
-      radial-gradient(900px 360px at 20% -10%, rgba(var(--brand-a), 0.18), transparent 60%),
-      radial-gradient(900px 360px at 85% 0%, rgba(var(--brand-c), 0.14), transparent 58%),
-      linear-gradient(180deg, rgb(var(--bg-0)) 0%, rgb(var(--bg-0)) 100%);
+      radial-gradient(900px 360px at 20% -10%, rgba(0, 0, 0, 0.08), transparent 60%),
+      radial-gradient(900px 360px at 85% 0%, rgba(15, 23, 42, 0.06), transparent 58%),
+      linear-gradient(180deg, #ffffff 0%, #ffffff 100%);
   }
 
   .surface {
@@ -52,8 +52,8 @@
 
   .poster {
     background:
-      radial-gradient(1200px 400px at 10% 0%, rgba(var(--brand-a), 0.20), transparent 60%),
-      radial-gradient(1200px 400px at 90% 20%, rgba(var(--brand-c), 0.16), transparent 55%),
-      linear-gradient(135deg, rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.78));
+      radial-gradient(1200px 400px at 10% 0%, rgba(255, 255, 255, 0.18), transparent 60%),
+      radial-gradient(1200px 400px at 90% 20%, rgba(255, 255, 255, 0.10), transparent 55%),
+      linear-gradient(135deg, rgba(0, 0, 0, 0.92), rgba(17, 24, 39, 0.86));
   }
 }
