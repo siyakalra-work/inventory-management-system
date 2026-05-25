@@ -25,9 +25,9 @@ export default function Layout() {
 
   return (
     <div className="min-h-screen district-bg text-slate-900">
-      <div className="mx-auto grid max-w-6xl gap-6 px-4 pb-24 pt-6 md:grid-cols-[280px_1fr] md:pb-10">
-        <aside className="hidden md:block">
-          <div className="sticky top-6 space-y-4">
+      <div className="grid min-h-screen md:grid-cols-[280px_1fr]">
+        <aside className="hidden border-r border-slate-200 bg-white/60 backdrop-blur md:block">
+          <div className="sticky top-0 flex h-screen flex-col gap-4 px-4 pb-6 pt-6">
             <div className="surface soft-shadow rounded-3xl p-4">
               <Link to="/" className="flex items-center gap-3">
                 <div className="brand-gradient grid h-10 w-10 place-items-center rounded-2xl text-white">
@@ -83,7 +83,7 @@ export default function Layout() {
           </div>
         </aside>
 
-        <main>
+        <main className="px-4 pb-24 pt-6 md:px-8 md:pb-10">
           <header className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center justify-between gap-3 md:hidden">
               <Link to="/" className="flex items-center gap-3">
