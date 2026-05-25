@@ -56,4 +56,48 @@
       radial-gradient(1200px 400px at 90% 20%, rgba(var(--brand-c), 0.16), transparent 55%),
       linear-gradient(135deg, rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.78));
   }
+
+  /* Subtle 3D depth */
+  .perspective-1200 {
+    perspective: 1200px;
+  }
+
+  .tilt-3d {
+    transform-style: preserve-3d;
+    transition: transform 240ms ease, box-shadow 240ms ease;
+    will-change: transform;
+  }
+
+  .tilt-3d:hover {
+    transform: rotateX(3deg) rotateY(-5deg) translateY(-2px);
+    box-shadow:
+      0 1px 0 rgba(15, 23, 42, 0.02),
+      0 24px 60px rgba(15, 23, 42, 0.16);
+  }
+
+  .shine {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shine::after {
+    content: "";
+    position: absolute;
+    inset: -40%;
+    background: linear-gradient(
+      120deg,
+      transparent 35%,
+      rgba(255, 255, 255, 0.45) 45%,
+      transparent 55%
+    );
+    transform: translateX(-50%) rotate(8deg);
+    opacity: 0;
+    transition: opacity 220ms ease, transform 420ms ease;
+    pointer-events: none;
+  }
+
+  .shine:hover::after {
+    opacity: 0.55;
+    transform: translateX(10%) rotate(8deg);
+  }
 }
