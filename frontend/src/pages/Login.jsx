@@ -23,8 +23,7 @@ export default function Login() {
     <div className="min-h-screen district-bg text-slate-900">
       <div className="mx-auto grid min-h-screen max-w-6xl grid-cols-1 gap-8 px-4 py-10 lg:grid-cols-2 lg:gap-10">
         <div className="order-2 lg:order-1">
-          <div className="perspective-1200">
-            <div className="surface soft-shadow tilt-3d shine rounded-3xl p-6 lg:p-8">
+          <div className="surface soft-shadow rounded-3xl p-6 lg:p-8">
             <div className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-3">
                 <div className="brand-gradient grid h-11 w-11 place-items-center rounded-2xl text-white">
@@ -61,11 +60,9 @@ export default function Login() {
                 { title: "Audit trail", desc: "Every movement is logged." },
                 { title: "Mobile-first", desc: "Bottom nav + responsive UI." },
               ].map((x) => (
-                <div key={x.title} className="perspective-1200">
-                  <div className="tilt-3d rounded-3xl bg-slate-50 p-5">
+                <div key={x.title} className="rounded-3xl bg-slate-50 p-5">
                   <div className="text-sm font-semibold text-slate-900">{x.title}</div>
                   <div className="mt-1 text-sm text-slate-600">{x.desc}</div>
-                  </div>
                 </div>
               ))}
             </div>
@@ -82,22 +79,18 @@ export default function Login() {
                   { t: "Earlier", d: "Inventory transactions + stock snapshot." },
                   { t: "Foundation", d: "Auth, tenants, and product catalog built." },
                 ].map((x) => (
-                  <div key={x.t} className="perspective-1200">
-                    <div className="surface tilt-3d rounded-3xl p-4">
+                  <div key={x.t} className="surface rounded-3xl p-4">
                     <div className="text-xs font-semibold text-slate-500">{x.t}</div>
                     <div className="mt-1 text-sm font-semibold text-slate-900">{x.d}</div>
-                    </div>
                   </div>
                 ))}
               </div>
-            </div>
             </div>
           </div>
         </div>
 
         <div className="order-1 lg:order-2 lg:flex lg:items-center">
-          <div className="perspective-1200 w-full">
-            <Card className="tilt-3d shine w-full">
+          <Card className="w-full">
             <CardHeader>
               <CardTitle>Welcome back</CardTitle>
               <div className="mt-1 text-sm text-slate-600">
@@ -190,8 +183,7 @@ export default function Login() {
                 </Link>
               </div>
             </CardContent>
-            </Card>
-          </div>
+          </Card>
         </div>
       </div>
     </div>
