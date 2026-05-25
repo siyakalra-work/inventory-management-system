@@ -293,3 +293,73 @@ export function IconAlert(props) {
   );
 }
 
+export function IconCoin(props) {
+  return (
+    <svg {...baseProps(props)}>
+      <path
+        d="M12 3c4.4 0 8 1.8 8 4s-3.6 4-8 4-8-1.8-8-4 3.6-4 8-4Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M4 7v5c0 2.2 3.6 4 8 4s8-1.8 8-4V7"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M4 12v5c0 2.2 3.6 4 8 4s8-1.8 8-4v-5"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function IconTrendUp(props) {
+  return (
+    <svg {...baseProps(props)}>
+      <path
+        d="M3 17l6-6 4 4 7-7"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M14 8h6v6"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function IconBoxes(props) {
+  return (
+    <svg {...baseProps(props)}>
+      <path
+        d="M7.5 7.5 12 5l4.5 2.5L12 10 7.5 7.5Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M4 7v10l8 4 8-4V7"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12 10v11"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}

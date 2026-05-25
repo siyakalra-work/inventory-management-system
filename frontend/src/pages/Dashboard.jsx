@@ -7,23 +7,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/Card"
 import { IconActivity, IconAlert, IconBox } from "../components/ui/Icons";
 import Button from "../components/ui/Button";
 import { Link } from "react-router-dom";
-
-function Stat({ label, value, hint, tone = "slate" }) {
-  return (
-    <div className="surface soft-shadow rounded-3xl p-4">
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          <div className="text-xs font-semibold text-slate-600">{label}</div>
-          <div className="mt-1 text-2xl font-semibold text-slate-900">
-            {value}
-          </div>
-          {hint ? <div className="mt-1 text-xs text-slate-500">{hint}</div> : null}
-        </div>
-        <Badge tone={tone}>{label}</Badge>
-      </div>
-    </div>
-  );
-}
+import KpiCard from "../components/ui/KpiCard";
+import { IconCoin, IconBoxes, IconTrendUp } from "../components/ui/Icons";
 
 export default function Dashboard() {
   const productsQuery = useQuery({
@@ -38,9 +23,31 @@ export default function Dashboard() {
   const products = productsQuery.data || [];
   const txns = txnsQuery.data || [];
 
-  const lowStock = useMemo(() => {
-    return products.filter((p) => (p.reorder_point ?? 0) > 0).length;
-  }, [products]);
+  const kpis = useMemo(() => {
+    const productsCount = products.length;
+    const withReorder = products.filter((p) => (p.reorder_point ?? 0) > 0).length;
+    const movements = txns.length;
+
+    let net = 0;
+    for (const t of txns) net += Number(t.quantity || 0);
+
+    const topType = txns.reduce(
+      (acc, t) => {
+        acc[t.type] = (acc[t.type] || 0) + 1;
+        return acc;
+      },
+      {},
+    );
+    const mostCommonType = Object.entries(topType).sort((a, b) => b[1] - a[1])[0]?.[0] || "—";
+
+    return {
+      productsCount,
+      withReorder,
+      movements,
+      net,
+      mostCommonType,
+    };
+  }, [products, txns]);
 
   return (
     <div className="space-y-6">
@@ -77,24 +84,38 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-        <Stat
-          label="Products"
-          value={productsQuery.isLoading ? "…" : products.length}
-          hint="Catalog size"
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+        <KpiCard
+          title="Products"
+          value={kpis.productsCount}
+          subtitle="Total SKUs in catalog"
           tone="indigo"
+          icon={<IconBoxes />}
+          loading={productsQuery.isLoading}
         />
-        <Stat
-          label="Transactions"
-          value={txnsQuery.isLoading ? "…" : txns.length}
-          hint="Last 200 entries"
+        <KpiCard
+          title="Movements"
+          value={kpis.movements}
+          subtitle={`Most common: ${kpis.mostCommonType}`}
           tone="emerald"
+          icon={<IconTrendUp />}
+          loading={txnsQuery.isLoading}
         />
-        <Stat
-          label="Reorder Points"
-          value={productsQuery.isLoading ? "…" : lowStock}
-          hint="Products with reorder point set"
+        <KpiCard
+          title="Net Quantity"
+          value={kpis.net}
+          subtitle="Net delta (last 200)"
           tone="amber"
+          icon={<IconCoin />}
+          loading={txnsQuery.isLoading}
+        />
+        <KpiCard
+          title="Reorder Points"
+          value={kpis.withReorder}
+          subtitle="Products with RP set"
+          tone="rose"
+          icon={<IconAlert />}
+          loading={productsQuery.isLoading}
         />
       </div>
 
@@ -243,8 +264,8 @@ export default function Dashboard() {
             <div className="space-y-2">
               <div className="flex items-center justify-between rounded-2xl bg-slate-50 px-4 py-3">
                 <div className="text-sm text-slate-700">Low-stock watch</div>
-                <Badge tone={lowStock ? "rose" : "emerald"}>
-                  {lowStock ? "Review" : "OK"}
+                <Badge tone={kpis.withReorder ? "amber" : "emerald"}>
+                  {kpis.withReorder ? "Watch" : "OK"}
                 </Badge>
               </div>
               <div className="flex items-center justify-between rounded-2xl bg-slate-50 px-4 py-3">
