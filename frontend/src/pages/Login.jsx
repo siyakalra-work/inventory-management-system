@@ -7,6 +7,7 @@ import Button from "../components/ui/Button";
 import Input from "../components/ui/Input";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/Card";
 import { IconTicket } from "../components/ui/Icons";
+import { cn } from "../lib/cn";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -20,15 +21,15 @@ export default function Login() {
 
   return (
     <div className="min-h-screen district-bg text-slate-900">
-      <div className="mx-auto flex min-h-screen max-w-6xl items-center justify-center px-4 py-10">
-        <div className="grid w-full max-w-4xl grid-cols-1 gap-8 md:grid-cols-2">
-          <div className="hidden md:block">
-            <div className="surface soft-shadow rounded-3xl p-8">
-              <div className="inline-flex items-center gap-3">
+      <div className="mx-auto grid min-h-screen max-w-6xl grid-cols-1 gap-8 px-4 py-10 lg:grid-cols-2 lg:gap-10">
+        <div className="order-2 lg:order-1">
+          <div className="surface soft-shadow rounded-3xl p-6 lg:p-8">
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
                 <div className="brand-gradient grid h-11 w-11 place-items-center rounded-2xl text-white">
                   IO
                 </div>
-                <div>
+                <div className="leading-tight">
                   <div className="text-sm font-semibold text-slate-900">
                     InventoryOS
                   </div>
@@ -37,32 +38,73 @@ export default function Login() {
                   </div>
                 </div>
               </div>
-              <div className="mt-6 text-sm text-slate-600">
-                Sign in to manage products, log stock movements, and keep
-                reorder points under control.
+
+              <div className="hidden items-center gap-2 sm:flex">
+                <Link to="/login">
+                  <button className={cn("rounded-2xl px-4 py-2 text-sm font-semibold", "bg-slate-900 text-white")}>
+                    Login
+                  </button>
+                </Link>
+                <Link to="/register">
+                  <button className={cn("rounded-2xl px-4 py-2 text-sm font-semibold", "bg-white text-slate-900 ring-1 ring-slate-200 hover:bg-slate-50")}>
+                    Sign up
+                  </button>
+                </Link>
               </div>
-              <div className="mt-6 grid grid-cols-2 gap-3 text-xs text-slate-600">
-                <div className="rounded-2xl bg-slate-50 p-4">
-                  Fast search
+            </div>
+
+            <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {[
+                { title: "Poster cards", desc: "Beautiful product cards, fast scanning." },
+                { title: "Low stock alerts", desc: "Reorder points → alerts page." },
+                { title: "Audit trail", desc: "Every movement is logged." },
+                { title: "Mobile-first", desc: "Bottom nav + responsive UI." },
+              ].map((x) => (
+                <div key={x.title} className="rounded-3xl bg-slate-50 p-5">
+                  <div className="text-sm font-semibold text-slate-900">{x.title}</div>
+                  <div className="mt-1 text-sm text-slate-600">{x.desc}</div>
                 </div>
-                <div className="rounded-2xl bg-slate-50 p-4">
-                  Clean tables
-                </div>
-                <div className="rounded-2xl bg-slate-50 p-4">
-                  Stock history
-                </div>
-                <div className="rounded-2xl bg-slate-50 p-4">
-                  Alerts ready
-                </div>
+              ))}
+            </div>
+
+            <div className="mt-6">
+              <div className="flex items-center justify-between">
+                <div className="text-sm font-semibold text-slate-900">History</div>
+                <div className="text-xs text-slate-500">Scroll</div>
+              </div>
+              <div className="mt-3 max-h-[320px] space-y-3 overflow-auto pr-2">
+                {[
+                  { t: "Today", d: "Alerts page + sidebar navigation added." },
+                  { t: "Last week", d: "Poster-style product cards shipped." },
+                  { t: "Earlier", d: "Inventory transactions + stock snapshot." },
+                  { t: "Foundation", d: "Auth, tenants, and product catalog built." },
+                ].map((x) => (
+                  <div key={x.t} className="surface rounded-3xl p-4">
+                    <div className="text-xs font-semibold text-slate-500">{x.t}</div>
+                    <div className="mt-1 text-sm font-semibold text-slate-900">{x.d}</div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
+        </div>
 
-          <Card className="shadow-lg">
+        <div className="order-1 lg:order-2 lg:flex lg:items-center">
+          <Card className="w-full">
             <CardHeader>
               <CardTitle>Welcome back</CardTitle>
               <div className="mt-1 text-sm text-slate-600">
-                Sign in to your tenant.
+                Sign in to your tenant workspace.
+              </div>
+              <div className="mt-4 flex items-center gap-2 sm:hidden">
+                <Link to="/login" className="flex-1">
+                  <Button className="w-full" variant="secondary">
+                    Login
+                  </Button>
+                </Link>
+                <Link to="/register" className="flex-1">
+                  <Button className="w-full">Sign up</Button>
+                </Link>
               </div>
             </CardHeader>
             <CardContent>
@@ -128,12 +170,7 @@ export default function Login() {
                     autoComplete="current-password"
                   />
                 </div>
-                <Button
-                  type="submit"
-                  size="lg"
-                  className="w-full"
-                  disabled={busy}
-                >
+                <Button type="submit" size="lg" className="w-full" disabled={busy}>
                   <IconTicket className="h-4 w-4" />
                   {busy ? "Signing in..." : "Sign in"}
                 </Button>
